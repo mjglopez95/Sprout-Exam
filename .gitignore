@@ -1,0 +1,11 @@
+env
+
+requirements.txt
+
+backend/.env
+backend/alembic
+alembic.ini
+
+__pycache__/
+
+

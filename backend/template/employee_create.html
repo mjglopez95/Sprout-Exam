@@ -1,0 +1,119 @@
+
+{% extends "index.html" %}
+
+{% block content %}
+    <div class="row align-items-center">
+        <div class="col-auto d-flex align-items-center">
+            <img src="https://sprout.ph/wp-content/uploads/2021/08/Sprout-Logo-1-02-1.png" style="width: 10%; height: auto;">
+        </div>
+    </div>
+    <div class="container mt-3">
+        <h4 class="mb-0 pb-4">EMPLOYEE PROFILE</h4>
+        <div class="flex-row">
+            <div class="col-md-4">  
+                <div class="card mb-3 shadow-sm">
+                    <div class="card-body">
+                        <div>
+                            <h5 class="card-title mb-2 fw-bold">Create New Employee</h5>
+                                <div class="flex-row pt-4 pb-2" >
+                                    <form method="POST" action="/employees/create">
+                                        <div class="form-group mb-3" >
+                                            <label for="firstNameInput">First Name</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" name="first_name" class="form-control" id="firstNameInput" required/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb-3" >
+                                            <label for="lastNameInput">Last Name</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" name="last_name" class="form-control" id="lastNameInput" required/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb-3" >
+                                            <label for="emailInput">Email</label>
+                                            <div class="col-sm-9">
+                                                <input type="email" name="email" class="form-control" id="emailInput" required/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb-3" >
+                                            <label for="employeeTypeInput">Employee Type</label>
+                                            <div class="col-sm-9">
+                                                <select name="employee_type" class="form-control" id="employeeTypeInput">
+                                                    {% for type in employee_types %}
+                                                            <option value="{{ type.id }}">{{ type.description }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb-3" id="leavesGroup">
+                                            <label for="leavesInput">Leaves</label>
+                                            <div class="col-sm-9">
+                                                <input type="number" name="leaves" class="form-control" id="leavesInput"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb-3" id="benefitsGroup">
+                                            <label for="benefitsInput">Benefits</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" name="benefits" class="form-control" id="benefitsInput"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb-3" id="projectGroup">
+                                            <label for="projectInput">Project</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" name="project" class="form-control" id="projectInput"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb-3" id="contractEndGroup">
+                                            <label for="contractEndInput">Contract End</label>
+                                            <div class="col-sm-9">
+                                                <input type="date" name="contract_end" class="form-control" id="contractEndInput"/>
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="btn btn-success" style="width: 25%;">Create</button>
+                                        <button type="button" class="btn btn-primary" onclick="location.href='/employees';">Back to Employee List</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(
+            function () {
+               employeeType = document.getElementById('employeeTypeInput')
+            if (employeeType.value === '1' | !employeeType.value) {  
+                $("#leavesGroup").show();
+                $("#benefitsGroup").show(); 
+                $("#projectGroup").hide();
+                $("#contractEndGroup").hide();
+            } else {
+                $("#leavesGroup").hide();
+                $("#benefitsGroup").hide(); 
+                $("#projectGroup").show();
+                $("#contractEndGroup").show();
+            }
+            }
+        )
+        $('#employeeTypeInput').on('change', function() {
+            if (this.value === '1') {  
+                $("#leavesGroup").show();
+                $("#benefitsGroup").show(); 
+                $("#projectGroup").hide();
+                $("#projectInput").removeAttr('value');
+                $("#contractEndGroup").hide();
+                $("#contractEndInput").removeAttr('value');
+            } else {
+                $("#leavesGroup").hide();
+                $("#leavesInput").removeAttr('value');
+                $("#benefitsGroup").hide(); 
+                $("#benefitsInput").removeAttr('value'); 
+                $("#projectGroup").show();
+                $("#contractEndGroup").show();
+            }
+        });
+    </script>
+{% endblock %}

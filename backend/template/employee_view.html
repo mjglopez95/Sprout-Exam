@@ -1,0 +1,56 @@
+
+{% extends "index.html" %}
+
+{% block content %}
+    <div class="row align-items-center">
+        <div class="col-auto d-flex align-items-center">
+            <img src="https://sprout.ph/wp-content/uploads/2021/08/Sprout-Logo-1-02-1.png" style="width: 10%; height: auto;">
+        </div>
+    </div>
+    <div class="container mt-3">
+        <h2 class="mb-0 pb-4 fw-bold">EMPLOYEE PROFILE</h4>
+        <div class="flex-row">
+            <div class="col-md-4">  
+                <div class="card mb-3 shadow-sm">
+                    <div class="card-body">
+                        <div>
+                            <h3 class="card-title mb-2 fw-bold">{{ employees.first_name }} {{ employees.last_name }}</h5>
+                                <div class="flex-row pt-4 pb-2" >
+                                    <div class="form-group mb-3" >
+                                        <label>First Name</label>
+                                        <div class="col-sm-9">
+                                            <h5 class="card-title mb-2 fw-bold">{{ employees.first_name }}</h5>
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-3" >
+                                        <label>Last Name</label>
+                                        <div class="col-sm-9">
+                                            <h5 class="card-title mb-2 fw-bold">{{ employees.last_name }}</h5>
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-3" >
+                                        <label>Email</label>
+                                        <div class="col-sm-9">
+                                            <h5 class="card-title mb-2 fw-bold">{{ employees.email }}</h5>
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-3" >
+                                        <label>Employee Type</label>
+                                        {% for type in desc %}
+                                        <div class="col-sm-9">
+                                            <h5 class="card-title mb-2 fw-bold">{{ type }}</h5>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                    {% block type %}
+
+                                    {% endblock %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
