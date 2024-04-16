@@ -1,7 +1,5 @@
 env
 
-requirements.txt
-
 backend/.env
 backend/alembic
 alembic.ini
